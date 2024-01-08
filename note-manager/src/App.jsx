@@ -5,7 +5,9 @@ import './App.css'
 import axios from 'axios'
 
 function Notes({notes, toggleImportance}) {
-  const label = notes['important'] ? 'make not important' : 'make important'
+  <div>
+    <p>{notes}</p>
+  </div>
 }
 
 function App() {
@@ -13,9 +15,12 @@ function App() {
   const [showAll, setShowAll] = useState(true)
   const [notes, setNotes] = useState()
 
+
+
   return (
     <>
       <h1 className='text-5xl'>Hello World</h1>
+      
 
     </>
   )
