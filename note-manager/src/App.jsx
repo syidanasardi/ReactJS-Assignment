@@ -4,9 +4,12 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import axios from 'axios'
 
-function Note({note}) {
+function Note({note, handleDelete}) {
     return (
-      <li>{note['content']}</li>
+      <div>
+        <li>{note['content']}</li>
+        <button onClick={handleDelete}>Delete</button>
+      </div>
     )
 }
 
@@ -22,20 +25,29 @@ function App() {
 
   function addNote(event) {
     event.preventDefault()
-    const noteObject = {
-      id : notes.length + 1,
-      content : newNote
-    }
+    if (newNote !== '') {
+      const noteObject = {
+        content : newNote
+      }
 
-    axios.post('http://localhost:3000/notes', noteObject)
-    .then(response => {
-      setNotes(notes.concat(response.data))
-      setNewNote('')
-    })
+      axios.post('http://localhost:3000/notes', noteObject)
+      .then(response => {
+        setNotes(notes.concat(response.data))
+        setNewNote('')
+      })
+    }
   }
 
-  function handleFormCHange(event) {
+  function handleInputChange(event) {
     setNewNote(event.target.value)
+  }
+
+  function handleDeleteOf(id) {
+    const url = 'http://localhost:3000/notes/' + id
+    axios.delete(url)
+    .then(response => console.log(response['data']))
+
+    setNotes(notes.filter(note => note['id'] !== id))
   }
 
 
@@ -44,11 +56,13 @@ function App() {
       <h1 className='text-5xl'>Notes</h1>
       <ul className='text-left'>
       {notes.map(note => 
-          <Note key={note['id']} note={note} />
+          <Note key={note['id']} note={note} handleDelete={() => handleDeleteOf(note['id'])}/>
         )}
       </ul>
       <form onSubmit={addNote} className='text-left'>
-        <input value={newNote} onChange={handleFormCHange}/>
+        <br />
+        <p>Input here to add note</p>
+        <input value={newNote} onChange={handleInputChange} className='border-solid border-black border-2 rounded-lg px-1'/>
         <button type='submit'>save</button>
       </form>
     </div>
