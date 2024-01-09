@@ -1,8 +1,20 @@
 {
-    "notes" : [
-        {
-            "id" : 1,
-            "content" : "Hello world"
-        }
-    ]
+  "notes": [
+    {
+      "id": 1,
+      "content": "Hello world"
+    },
+    {
+      "id": 2,
+      "content": "Hello Guys"
+    },
+    {
+      "id": 3,
+      "content": "Halo"
+    },
+    {
+      "id": 4,
+      "content": "ssjsjsjs"
+    }
+  ]
 }
