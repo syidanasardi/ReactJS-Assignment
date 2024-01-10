@@ -7,6 +7,7 @@ import axios from 'axios'
 function Note({note, handleDelete}) {
     return (
       <div>
+        <h1 className='text-xl'>{note['title']}</h1>
         <li>{note['content']}</li>
         <button onClick={handleDelete}>Delete</button>
       </div>
@@ -14,9 +15,9 @@ function Note({note, handleDelete}) {
 }
 
 function App() {
-  const [showAll, setShowAll] = useState(true)
   const [notes, setNotes] = useState([])
   const [newNote, setNewNote] = useState('')
+  const [newTitle, setNewTitle] = useState('')
 
   useEffect(() => {
     axios.get('http://localhost:3000/notes')
@@ -25,21 +26,22 @@ function App() {
 
   function addNote(event) {
     event.preventDefault()
-    if (newNote !== '') {
+    if (newNote !== '' && newTitle !== '') {
       const noteObject = {
+        title : newTitle,
         content : newNote
       }
 
       axios.post('http://localhost:3000/notes', noteObject)
       .then(response => {
         setNotes(notes.concat(response.data))
+        setNewTitle('')
         setNewNote('')
       })
     }
-  }
-
-  function handleInputChange(event) {
-    setNewNote(event.target.value)
+    else {
+      alert('invalid input')
+    }
   }
 
   function handleDeleteOf(id) {
@@ -54,15 +56,21 @@ function App() {
   return (
     <div>
       <h1 className='text-5xl'>Notes</h1>
-      <ul className='text-left'>
+      <br />
+      <ul>
       {notes.map(note => 
           <Note key={note['id']} note={note} handleDelete={() => handleDeleteOf(note['id'])}/>
         )}
       </ul>
-      <form onSubmit={addNote} className='text-left'>
+      <form onSubmit={addNote}>
         <br />
         <p>Input here to add note</p>
-        <input value={newNote} onChange={handleInputChange} className='border-solid border-black border-2 rounded-lg px-1'/>
+        <label htmlFor="titleInput">Title</label>
+        <input id='titleInput' value={newTitle} onChange={(e) => setNewTitle(e.target.value)} className='border-solid border-black border-2 rounded-lg px-1'/>
+        <br />
+        <label htmlFor="noteInput">note</label>
+        <input id='noteInput' value={newNote} onChange={(e) => setNewNote(e.target.value)} className='border-solid border-black border-2 rounded-lg px-1'/>
+        <br />
         <button type='submit'>save</button>
       </form>
     </div>

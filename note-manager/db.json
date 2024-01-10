@@ -1,12 +1,9 @@
 {
   "notes": [
     {
-      "id": "4df5",
-      "content": "Hello"
-    },
-    {
-      "id": "84c6",
-      "content": "Nice"
+      "id": "253d",
+      "title": "First Note",
+      "content": "Hello world"
     }
   ]
 }
