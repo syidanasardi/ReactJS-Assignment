@@ -1,9 +1,19 @@
+import {useState, useEffect} from 'react'
+import { useParams } from 'react-router-dom'
 import axios from 'axios'
-import {useState} from 'react'
 
-function Create() {
+function Edit() {
+    const {id} = useParams()
     const [newNote, setNewNote] = useState('')
     const [newTitle, setNewTitle] = useState('')
+
+    useEffect(() => {
+        axios.get('http://localhost:3000/notes/' + id)
+        .then(response => {
+            setNewTitle(response.data.title)
+            setNewNote(response.data.content)
+        })
+      }, [])
 
     function addNote(event) {
         event.preventDefault()
@@ -41,8 +51,8 @@ function Create() {
               <br /><br />
               <button type='submit'>save</button>
           </form>
-          </div>
+        </div>
     )
 }
 
-export default Create
+export default Edit

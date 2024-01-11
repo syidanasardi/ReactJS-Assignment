@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 function Note({note, handleDelete}) {
     return (
@@ -7,6 +8,7 @@ function Note({note, handleDelete}) {
         <h1 className='text-xl'>{note['title']}</h1>
         <li>{note['content']}</li>
         <button onClick={handleDelete}>Delete</button>
+        <Link to={'/edit/'+note.id}>Edit</Link>
       </div>
     )
 }
