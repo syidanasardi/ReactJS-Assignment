@@ -15,7 +15,7 @@ function Edit() {
         })
       }, [])
 
-    function addNote(event) {
+    function editNote(event) {
         event.preventDefault()
         if (newNote !== '' && newTitle !== '') {
           const noteObject = {
@@ -23,11 +23,7 @@ function Edit() {
             content : newNote
           }
     
-          axios.post('http://localhost:3000/notes', noteObject)
-          .then(response => {
-            setNewTitle('')
-            setNewNote('')
-          })
+          axios.put('http://localhost:3000/notes/' + id, noteObject)
         }
         else {
           alert('invalid input')
@@ -36,17 +32,17 @@ function Edit() {
 
     return (
         <div  className='place-content-center max-w-[50%] m-auto'>
-          <form onSubmit={addNote}>
+          <form onSubmit={editNote}>
               <p className='text-3xl py-[30px]'>Input here to add note</p>
               <label htmlFor="titleInput">Title </label><br />
               <input id='titleInput' value={newTitle} onChange={(e) => setNewTitle(e.target.value)} placeholder='Title' className='border-solid border-black border-2 rounded-lg px-1 w-full'/>
               <br />
               <label htmlFor="noteInput">note </label><br />
-              <textarea id='noteInput' value={newNote} onChange={(e) => setNewNote(e.target.value)} placeholder='Insert Note' className='border-solid border-black border-2 rounded-lg px-1 w-full'/>
+              <textarea id='noteInput' value={newNote} onChange={(e) => setNewNote(e.target.value)} placeholder='Insert Note' className='border-solid border-black border-2 rounded-lg px-1 w-full h-4/5'/>
               <br />
               <select>
-                <option value="Important">Important</option>
-                <option value="Not Important">Not Important</option>
+                <option value={true}>Important</option>
+                <option value={false}>Not Important</option>
               </select>
               <br /><br />
               <button type='submit'>save</button>

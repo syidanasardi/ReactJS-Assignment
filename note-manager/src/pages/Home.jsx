@@ -4,11 +4,13 @@ import {Link} from 'react-router-dom'
 
 function Note({note, handleDelete}) {
     return (
-      <div>
+      <div className='my-5'>
         <h1 className='text-xl'>{note['title']}</h1>
-        <li>{note['content']}</li>
-        <button onClick={handleDelete}>Delete</button>
-        <Link to={'/edit/'+note.id}>Edit</Link>
+        <p className='text-justify'>{note['content']}</p>
+        <div className='space-x-2'>
+          <button onClick={handleDelete} className='text-red'>Delete</button>
+          <Link to={'/edit/'+note.id}>Edit</Link>
+        </div>
       </div>
     )
 }
@@ -34,13 +36,13 @@ function Home() {
 
   return (
     <div>
-      <h1 className='text-5xl'>Notes</h1>
+      <h1 className='text-5xl relative top-6 left-6'>Notes</h1>
       <br />
-      <ul>
+      <div className='text-center max-w-[50%] m-auto'>
       {notes.map(note => 
           <Note key={note['id']} note={note} handleDelete={() => handleDeleteOf(note['id'])}/>
         )}
-      </ul>
+      </div>
     </div>
   )
 }
