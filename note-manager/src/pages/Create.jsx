@@ -4,13 +4,15 @@ import {useState} from 'react'
 function Create() {
     const [newNote, setNewNote] = useState('')
     const [newTitle, setNewTitle] = useState('')
+    const [important, setImportant] = useState(true)
 
     function addNote(event) {
         event.preventDefault()
         if (newNote !== '' && newTitle !== '') {
           const noteObject = {
             title : newTitle,
-            content : newNote
+            content : newNote,
+            important : important
           }
     
           axios.post('http://localhost:3000/notes', noteObject)
@@ -34,9 +36,9 @@ function Create() {
               <label htmlFor="noteInput">note </label><br />
               <textarea id='noteInput' value={newNote} onChange={(e) => setNewNote(e.target.value)} placeholder='Insert Note' className='border-solid border-black border-2 rounded-lg px-1 w-full'/>
               <br />
-              <select>
-                <option value="Important">Important</option>
-                <option value="Not Important">Not Important</option>
+              <select value={important} onChange={(e) => setImportant(e.target.value)}>
+                <option value={true}>Important</option>
+                <option value={false}>Not Important</option>
               </select>
               <br /><br />
               <button type='submit'>save</button>

@@ -6,12 +6,14 @@ function Edit() {
     const {id} = useParams()
     const [newNote, setNewNote] = useState('')
     const [newTitle, setNewTitle] = useState('')
+    const [important, setImportant] = useState(true)
 
     useEffect(() => {
         axios.get('http://localhost:3000/notes/' + id)
         .then(response => {
             setNewTitle(response.data.title)
             setNewNote(response.data.content)
+            setImportant(response.data.important)
         })
       }, [])
 
@@ -20,7 +22,8 @@ function Edit() {
         if (newNote !== '' && newTitle !== '') {
           const noteObject = {
             title : newTitle,
-            content : newNote
+            content : newNote,
+            important : important
           }
     
           axios.put('http://localhost:3000/notes/' + id, noteObject)
@@ -40,7 +43,7 @@ function Edit() {
               <label htmlFor="noteInput">note </label><br />
               <textarea id='noteInput' value={newNote} onChange={(e) => setNewNote(e.target.value)} placeholder='Insert Note' className='border-solid border-black border-2 rounded-lg px-1 w-full h-4/5'/>
               <br />
-              <select>
+              <select value={important} onChange={(e) => setImportant(e.target.value)}>
                 <option value={true}>Important</option>
                 <option value={false}>Not Important</option>
               </select>
