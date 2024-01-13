@@ -4,7 +4,7 @@ import {useState} from 'react'
 function Create() {
     const [newNote, setNewNote] = useState('')
     const [newTitle, setNewTitle] = useState('')
-    const [important, setImportant] = useState(true)
+    const [important, setImportant] = useState('low')
 
     function addNote(event) {
         event.preventDefault()
@@ -36,12 +36,14 @@ function Create() {
               <label htmlFor="noteInput">note </label><br />
               <textarea id='noteInput' value={newNote} onChange={(e) => setNewNote(e.target.value)} placeholder='Insert Note' className='border-solid border-black border-2 rounded-lg px-1 w-full'/>
               <br />
-              <select value={important} onChange={(e) => setImportant(e.target.value)}>
-                <option value={true}>Important</option>
-                <option value={false}>Not Important</option>
+              <label htmlFor="importance">Importance: </label>
+              <select id='importance' value={important} onChange={(e) => setImportant(e.target.value)}>
+                <option value='low'>Low</option>
+                <option value='medium'>Medium</option>
+                <option value="high">High</option>
               </select>
               <br /><br />
-              <button type='submit'>save</button>
+              <button type='submit' className='text-red-700 border-solid rounded-xl border-red-700 border-2 p-2 hover:bg-red-700 hover:text-white'>Add Note</button>
           </form>
           </div>
     )

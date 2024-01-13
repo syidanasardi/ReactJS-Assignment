@@ -34,7 +34,7 @@ function Edit() {
       }
 
     return (
-        <div  className='place-content-center max-w-[50%] m-auto'>
+        <div className='place-content-center max-w-[50%] m-auto'>
           <form onSubmit={editNote}>
               <p className='text-3xl py-[30px]'>Input here to add note</p>
               <label htmlFor="titleInput">Title </label><br />
@@ -43,9 +43,11 @@ function Edit() {
               <label htmlFor="noteInput">note </label><br />
               <textarea id='noteInput' value={newNote} onChange={(e) => setNewNote(e.target.value)} placeholder='Insert Note' className='border-solid border-black border-2 rounded-lg px-1 w-full h-4/5'/>
               <br />
-              <select value={important} onChange={(e) => setImportant(e.target.value)}>
-                <option value={true}>Important</option>
-                <option value={false}>Not Important</option>
+              <label htmlFor="importance">Importance: </label>
+              <select id='importance' value={important} onChange={(e) => setImportant(e.target.value)}>
+                <option value='low'>Low</option>
+                <option value='medium'>Medium</option>
+                <option value="high">High</option>
               </select>
               <br /><br />
               <button type='submit'>save</button>
