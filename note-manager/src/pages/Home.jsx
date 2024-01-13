@@ -59,10 +59,10 @@ function Home() {
     <div>
       <h1 className='text-5xl text-center m-4'>Notes</h1><br />
       <div className='text-center space-x-36 text-2xl'>
-        <button onClick={handleAllButton}>All</button>
-        <button onClick={handleLowButton}>Low</button>
-        <button onClick={handleMediumButton}>Medium</button>
-        <button onClick={handleHighButton}>High</button>
+        <button onClick={handleAllButton} className='hover:font-bold'>All</button>
+        <button onClick={handleLowButton} className='hover:font-bold'>Low</button>
+        <button onClick={handleMediumButton} className='hover:font-bold'>Medium</button>
+        <button onClick={handleHighButton} className='hover:font-bold'>High</button>
         </div>
       <br />
       <div className='text-center max-w-[50%] m-auto space-y-11'>
