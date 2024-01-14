@@ -58,6 +58,7 @@ function Home() {
   return (
     <div>
       <h1 className='text-5xl text-center m-4'>Notes</h1><br />
+      <h1 className='text-center space-x-36 text-2xl p-4'>Select Importance to Show</h1>
       <div className='text-center space-x-36 text-2xl'>
         <button onClick={handleAllButton} className='hover:font-bold'>All</button>
         <button onClick={handleLowButton} className='hover:font-bold'>Low</button>
